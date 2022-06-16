@@ -16,14 +16,14 @@ public class Student {
 
     @ManyToOne
     @JoinColumn(name = "year_id")
-    private Year year_id;
+    private Year year;
 
-    public Year getYear_id() {
-        return year_id;
+    public Year getYear() {
+        return year;
     }
 
-    public void setYear_id(Year year_id) {
-        this.year_id = year_id;
+    public void setYear(Year year) {
+        this.year = year;
     }
 
     public Student(){

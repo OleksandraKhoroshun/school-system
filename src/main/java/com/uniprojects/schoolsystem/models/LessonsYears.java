@@ -11,11 +11,15 @@ public class LessonsYears {
 
     @ManyToOne
     @JoinColumn(name = "year_id")
-    private Year year_id;
+    private Year year;
 
     @ManyToOne
     @JoinColumn(name = "lesson_id")
-    private Lesson lesson_id;
+    private Lesson lesson;
+
+    @ManyToOne
+    @JoinColumn(name = "teachers")
+    private Teacher teacher;
 
     public LessonsYears() {
 
@@ -29,19 +33,19 @@ public class LessonsYears {
         this.lesson_year_id = lesson_year_id;
     }
 
-    public Year getYear_id() {
-        return year_id;
+    public Year getYear() {
+        return year;
     }
 
-    public void setYear_id(Year year_id) {
-        this.year_id = year_id;
+    public void setYear(Year year) {
+        this.year = year;
     }
 
-    public Lesson getLesson_id() {
-        return lesson_id;
+    public Lesson getLesson() {
+        return lesson;
     }
 
-    public void setLesson_id(Lesson lesson_id) {
-        this.lesson_id = lesson_id;
+    public void setLesson(Lesson lesson) {
+        this.lesson = lesson;
     }
 }

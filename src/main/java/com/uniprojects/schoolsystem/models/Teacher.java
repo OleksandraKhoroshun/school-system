@@ -1,9 +1,7 @@
 package com.uniprojects.schoolsystem.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity(name = "teachers")
 public class Teacher {
@@ -16,6 +14,9 @@ public class Teacher {
     private String title;
     private String email;
     private String phone_number;
+
+    @OneToMany(mappedBy = "teachers")
+    private List<LessonsYears> lessonsYearsList;
 
     public Teacher(){
 
