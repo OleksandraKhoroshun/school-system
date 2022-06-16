@@ -1,5 +1,7 @@
 package com.uniprojects.schoolsystem.models;
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -12,8 +14,20 @@ public class Teacher {
     private String first_name;
     private String last_name;
     private String title;
+
+    @Lob
+    @Type(type="org.hibernate.type.BinaryType")
+    private byte[] teacher_photo;
     private String email;
     private String phone_number;
+
+    public byte[] getTeacher_photo() {
+        return teacher_photo;
+    }
+
+    public void setTeacher_photo(byte[] teacher_photo) {
+        this.teacher_photo = teacher_photo;
+    }
 
     @OneToMany(mappedBy = "teachers")
     private List<LessonYear> lessonsYears;
