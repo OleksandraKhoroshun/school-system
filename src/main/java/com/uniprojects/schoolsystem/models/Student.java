@@ -18,17 +18,6 @@ public class Student {
     @JoinColumn(name = "year_id")
     private Year year_id;
 
-    @OneToMany(mappedBy = "students")
-    private List<LessonsYears> lessonsYears;
-
-    public List<LessonsYears> getLessonsYears() {
-        return lessonsYears;
-    }
-
-    public void setLessonsYears(List<LessonsYears> lessonsYears) {
-        this.lessonsYears = lessonsYears;
-    }
-
     public Year getYear_id() {
         return year_id;
     }

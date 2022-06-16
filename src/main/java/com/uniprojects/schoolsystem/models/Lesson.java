@@ -12,6 +12,18 @@ public class Lesson {
     private String lesson_description;
     private Integer lesson_length;
 
+
+    @OneToMany(mappedBy = "lessons")
+    private List<LessonsYears> lessonsYears;
+
+    public List<LessonsYears> getLessonsYears() {
+        return lessonsYears;
+    }
+
+    public void setLessonsYears(List<LessonsYears> lessonsYears) {
+        this.lessonsYears = lessonsYears;
+    }
+
     public Lesson(){
 
     }
