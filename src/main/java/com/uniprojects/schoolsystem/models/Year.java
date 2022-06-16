@@ -13,13 +13,13 @@ public class Year {
     private List<Student> students;
 
     @OneToMany(mappedBy = "years")
-    private List<LessonsYears> lessonsYears;
+    private List<LessonYear> lessonsYears;
 
-    public List<LessonsYears> getLessonsYears() {
+    public List<LessonYear> getLessonsYears() {
         return lessonsYears;
     }
 
-    public void setLessonsYears(List<LessonsYears> lessonsYears) {
+    public void setLessonsYears(List<LessonYear> lessonsYears) {
         this.lessonsYears = lessonsYears;
     }
 

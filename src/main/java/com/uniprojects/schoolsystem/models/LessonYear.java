@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "lessons_years")
-public class LessonsYears {
+public class LessonYear {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long lesson_year_id;
@@ -18,10 +18,29 @@ public class LessonsYears {
     private Lesson lesson;
 
     @ManyToOne
-    @JoinColumn(name = "teachers")
+    @JoinColumn(name = "teacher_id")
     private Teacher teacher;
 
-    public LessonsYears() {
+    @OneToMany(mappedBy = "lesson_years")
+    private List<LessonSchedule> lessonSchedules;
+
+    public Teacher getTeacher() {
+        return teacher;
+    }
+
+    public void setTeacher(Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    public List<LessonSchedule> getLessonSchedules() {
+        return lessonSchedules;
+    }
+
+    public void setLessonSchedules(List<LessonSchedule> lessonSchedules) {
+        this.lessonSchedules = lessonSchedules;
+    }
+
+    public LessonYear() {
 
     }
 

@@ -16,7 +16,15 @@ public class Teacher {
     private String phone_number;
 
     @OneToMany(mappedBy = "teachers")
-    private List<LessonsYears> lessonsYearsList;
+    private List<LessonYear> lessonsYears;
+
+    public List<LessonYear> getLessonsYears() {
+        return lessonsYears;
+    }
+
+    public void setLessonsYears(List<LessonYear> lessonsYears) {
+        this.lessonsYears = lessonsYears;
+    }
 
     public Teacher(){
 
