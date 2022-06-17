@@ -1,5 +1,7 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.sql.Time;
 import java.util.List;
@@ -14,7 +16,8 @@ public class TimeSlot {
     private Time end_time;
     private boolean is_keynote_time_slot;
 
-    @OneToMany(mappedBy = "time_slots")
+    @OneToMany(mappedBy = "timeSlot", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<LessonSchedule> lessonSchedules;
 
     public List<LessonSchedule> getLessonSchedules() {

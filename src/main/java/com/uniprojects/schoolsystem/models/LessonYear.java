@@ -1,5 +1,7 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -18,10 +20,15 @@ public class LessonYear {
     private Lesson lesson;
 
     @ManyToOne
-    @JoinColumn(name = "teacher_id")
+    @JoinTable(
+            name="lessons_years_teachers",
+            joinColumns = @JoinColumn(name = "lesson_year_id"),
+            inverseJoinColumns = @JoinColumn(name="teacher_id")
+    )
     private Teacher teacher;
 
-    @OneToMany(mappedBy = "lesson_years")
+    @OneToMany(mappedBy = "lessonYear", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<LessonSchedule> lessonSchedules;
 
     public Teacher getTeacher() {

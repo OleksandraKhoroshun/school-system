@@ -1,5 +1,6 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
@@ -29,7 +30,8 @@ public class Teacher {
         this.teacher_photo = teacher_photo;
     }
 
-    @OneToMany(mappedBy = "teachers")
+    @OneToMany(mappedBy = "teacher")
+    @JsonIgnore
     private List<LessonYear> lessonsYears;
 
     public List<LessonYear> getLessonsYears() {

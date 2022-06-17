@@ -1,5 +1,8 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -10,7 +13,8 @@ public class Day {
     private Long day_id;
     private String day_name;
 
-    @OneToMany(mappedBy = "days")
+    @OneToMany(mappedBy = "day", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<LessonSchedule> lessonSchedules;
 
     public List<LessonSchedule> getLessonSchedules() {

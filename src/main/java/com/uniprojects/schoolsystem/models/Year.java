@@ -1,5 +1,7 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -9,10 +11,12 @@ public class Year {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long year_id;
 
-    @OneToMany(mappedBy = "years")
+    @OneToMany(mappedBy = "year")
+    @JsonIgnore
     private List<Student> students;
 
-    @OneToMany(mappedBy = "years")
+    @OneToMany(mappedBy = "year", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<LessonYear> lessonsYears;
 
     public List<LessonYear> getLessonsYears() {

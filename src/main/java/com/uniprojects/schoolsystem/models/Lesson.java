@@ -1,5 +1,8 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.NaturalId;
+
 import javax.persistence.*;
 import java.util.List;
 
@@ -13,7 +16,8 @@ public class Lesson {
     private Integer lesson_length;
 
 
-    @OneToMany(mappedBy = "lessons")
+    @OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @JsonIgnore
     private List<LessonYear> lessonsYears;
 
     public List<LessonYear> getLessonsYears() {
