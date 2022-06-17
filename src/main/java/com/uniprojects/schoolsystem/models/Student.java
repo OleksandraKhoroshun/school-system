@@ -1,9 +1,11 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
-import java.util.List;
 
 @Entity(name = "students")
+@JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
 public class Student {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
