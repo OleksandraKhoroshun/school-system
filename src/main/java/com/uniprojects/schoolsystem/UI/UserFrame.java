@@ -1,9 +1,11 @@
 package com.uniprojects.schoolsystem.UI;
 
+import com.uniprojects.schoolsystem.models.Student;
+
 import javax.swing.*;
 
 public class UserFrame extends JFrame {
-    public UserFrame(String type) {
+    public UserFrame(Student student) {
 
     }
 
