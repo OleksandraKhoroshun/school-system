@@ -1,7 +1,13 @@
 package com.uniprojects.schoolsystem.UI;
 
+import com.uniprojects.schoolsystem.SchoolSystemApplication;
+import com.uniprojects.schoolsystem.models.Student;
+import org.springframework.web.client.RestTemplate;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LoginFrame extends JFrame {
 
@@ -62,6 +68,17 @@ public class LoginFrame extends JFrame {
 
         loginButton.addActionListener(e -> {
             dispose();
+
+            String enteredLogin="ash";
+            String enteredPassword="1";
+
+            String GET_URL = "http://localhost:8080/api/v1/students/login/"+enteredLogin+"/"+enteredPassword;
+
+            RestTemplate restTemplate = new RestTemplate();
+
+            Student student = restTemplate.getForObject(GET_URL, Student.class);
+
+            UserFrame newUserFrame = new UserFrame(student);
 
             // Open new window with login result
             // new UserFrame(type);

@@ -1,6 +1,5 @@
 package com.uniprojects.schoolsystem.controllers;
 
-import com.uniprojects.schoolsystem.models.Day;
 import com.uniprojects.schoolsystem.models.Student;
 import com.uniprojects.schoolsystem.repositories.StudentRepository;
 import org.springframework.beans.BeanUtils;
@@ -27,9 +26,9 @@ public class StudentController {
     }
 
     @GetMapping
-    @RequestMapping({"{firstname}","{lastname}"} )
-    public Student get(@PathVariable("first_name") String firstname, @PathVariable("last_name") String lastname){
-        return studentRepository.findByFirst_nameAndLast_name(firstname, lastname);
+    @RequestMapping("/login/{login}/{pass}")
+    public Student get(@PathVariable String login, @PathVariable String pass){
+        return studentRepository.findByLoginAndPass(login,pass);
     }
 
     @PostMapping

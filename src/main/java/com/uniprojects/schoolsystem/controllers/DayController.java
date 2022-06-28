@@ -2,7 +2,6 @@ package com.uniprojects.schoolsystem.controllers;
 
 import com.uniprojects.schoolsystem.models.Day;
 import com.uniprojects.schoolsystem.repositories.DayRepository;
-import org.hibernate.Session;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;

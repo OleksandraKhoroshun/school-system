@@ -27,9 +27,9 @@ public class TeacherController {
     }
 
     @GetMapping
-    @RequestMapping({"{firstname}","{lastname}"} )
-    public Teacher get(@PathVariable("first_name") String firstname,@PathVariable("first_name") String lastname){
-        return teacherRepository.findByFirst_nameAndLast_name(firstname, lastname);
+    @RequestMapping("login/{login}")
+    public Teacher get(@PathVariable String login){
+        return teacherRepository.findByLogin(login);
     }
 
     @PostMapping

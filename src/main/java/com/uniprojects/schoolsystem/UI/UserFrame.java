@@ -1,20 +1,11 @@
 package com.uniprojects.schoolsystem.UI;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class UserFrame extends JFrame {
     public UserFrame(String type) {
-        super();
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setSize(ScreenWidth, ScreenHeight);
+
     }
 
-
-
-    private static final Font TitleFont = new Font("OCR A Extended", Font.ITALIC, 70);
-    private static final Font BaseFont = new Font("OCR A Extended", Font.PLAIN, 30);
-
-    private static final int ScreenWidth = 1920;
-    private static final int ScreenHeight = 1080;
+    // I'm making user interface, just need some enum type, change string to it
 }
