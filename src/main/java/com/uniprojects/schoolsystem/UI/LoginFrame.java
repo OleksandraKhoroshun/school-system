@@ -58,6 +58,16 @@ public class LoginFrame extends JFrame {
 
         loginPanel.add(exitButton, constraints);
 
+        loginButton.addActionListener(e -> {
+            dispose();
+
+            // Open new window with login result
+            // new UserFrame(type);
+            // type should be enum I guess
+        });
+
+        exitButton.addActionListener(e -> System.exit(0));
+
         add(loginPanel);
     }
 
