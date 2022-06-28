@@ -10,6 +10,8 @@ public class LoginFrame extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(ScreenWidth, ScreenHeight);
         setTitle("SchoolSystem Authorize");
+        Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+        setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
 
         GridBagConstraints constraints = new GridBagConstraints();
 
