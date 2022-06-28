@@ -24,6 +24,9 @@ public class Teacher {
     private String email;
     private String phone_number;
 
+    private String login;
+    private String pass;
+
     public byte[] getTeacher_photo() {
         return teacher_photo;
     }
@@ -42,6 +45,22 @@ public class Teacher {
 
     public void setLessonsYears(List<LessonYear> lessonsYears) {
         this.lessonsYears = lessonsYears;
+    }
+
+    public String getLogin() {
+        return login;
+    }
+
+    public void setLogin(String login) {
+        this.login = login;
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public Teacher(){

@@ -26,11 +26,6 @@ public class LessonController {
         return lessonRepository.getReferenceById(id);
     }
 
-    @GetMapping
-    @RequestMapping("{name}")
-    public Lesson get(@PathVariable("lesson_name") String name){
-        return lessonRepository.findByLesson_name(name);
-    }
 
     @PostMapping
     public Lesson create(@RequestBody final Lesson lesson){
