@@ -2,8 +2,6 @@ package com.uniprojects.schoolsystem.UI;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
 
@@ -61,7 +59,11 @@ public class LoginFrame extends JFrame {
         loginPanel.add(exitButton, constraints);
 
         loginButton.addActionListener(e -> {
-            // Login logic here
+            dispose();
+
+            // Open new window with login result
+            // new UserFrame(type);
+            // type should be enum I guess
         });
 
         exitButton.addActionListener(e -> System.exit(0));
