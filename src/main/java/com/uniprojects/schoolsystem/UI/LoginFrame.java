@@ -2,6 +2,8 @@ package com.uniprojects.schoolsystem.UI;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class LoginFrame extends JFrame {
 
@@ -57,6 +59,12 @@ public class LoginFrame extends JFrame {
         constraints.anchor = GridBagConstraints.LAST_LINE_END;
 
         loginPanel.add(exitButton, constraints);
+
+        loginButton.addActionListener(e -> {
+            // Login logic here
+        });
+
+        exitButton.addActionListener(e -> System.exit(0));
 
         add(loginPanel);
     }
