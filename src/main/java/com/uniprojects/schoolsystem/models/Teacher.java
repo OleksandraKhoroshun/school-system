@@ -9,7 +9,7 @@ import java.util.List;
 
 @Entity(name = "teachers")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-public class Teacher {
+public class Teacher extends User{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long teacher_id;

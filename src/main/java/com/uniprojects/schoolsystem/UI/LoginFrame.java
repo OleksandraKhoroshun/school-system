@@ -73,10 +73,11 @@ public class LoginFrame extends JFrame {
             String GET_URL = "http://localhost:8080/api/v1/students/login/"+enteredLogin+"/"+enteredPassword;
 
             RestTemplate restTemplate = new RestTemplate();
-
+           // User user = restTemplate.getForObject(GET_URL, User.class);
             Student student = restTemplate.getForObject(GET_URL, Student.class);
 
             UserFrame newUserFrame = new UserFrame(student);
+            newUserFrame.setVisible(true);
 
             // Open new window with login result
             // new UserFrame(type);

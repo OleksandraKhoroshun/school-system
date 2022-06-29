@@ -6,7 +6,7 @@ import javax.persistence.*;
 
 @Entity(name = "students")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-public class Student {
+public class Student extends User{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long student_id;
@@ -22,6 +22,7 @@ public class Student {
 
     private String login;
     private String pass;
+
 
     public String getLogin() {
         return login;
