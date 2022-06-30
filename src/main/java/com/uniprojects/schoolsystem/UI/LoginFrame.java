@@ -2,6 +2,7 @@ package com.uniprojects.schoolsystem.UI;
 
 import com.uniprojects.schoolsystem.SchoolSystemApplication;
 import com.uniprojects.schoolsystem.models.Student;
+import com.uniprojects.schoolsystem.models.User;
 import org.springframework.web.client.RestTemplate;
 
 import javax.swing.*;
@@ -75,15 +76,11 @@ public class LoginFrame extends JFrame {
             String GET_URL = "http://localhost:8080/api/v1/students/login/"+enteredLogin+"/"+enteredPassword;
 
             RestTemplate restTemplate = new RestTemplate();
-           // User user = restTemplate.getForObject(GET_URL, User.class);
-            Student student = restTemplate.getForObject(GET_URL, Student.class);
+            User user = restTemplate.getForObject(GET_URL, User.class);
+            //Student student = restTemplate.getForObject(GET_URL, Student.class);
 
-            UserFrame newUserFrame = new UserFrame(student);
+            UserFrame newUserFrame = new UserFrame(user);
             newUserFrame.setVisible(true);
-
-            // Open new window with login result
-            // new UserFrame(type);
-            // type should be enum I guess
         });
 
         exitButton.addActionListener(e -> System.exit(0));
