@@ -25,4 +25,8 @@ public class AnnounceDialog extends JDialog {
         pack();
         setLocation((Toolkit.getDefaultToolkit().getScreenSize().width-getSize().width)/2,(Toolkit.getDefaultToolkit().getScreenSize().height-getSize().height)/2);
     }
+
+    public AnnounceDialog(Frame frame, String labelText) {
+        this(frame, true, "Error", labelText);
+    }
 }

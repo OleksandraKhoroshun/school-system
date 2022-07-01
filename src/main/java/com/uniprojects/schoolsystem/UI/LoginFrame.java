@@ -80,12 +80,12 @@ public class LoginFrame extends JFrame {
                 //User user = restTemplate.getForObject(GET_URL, User.class);
                 user = restTemplate.getForObject(GET_URL, Student.class);
             } catch (HttpClientErrorException ex) {
-                new AnnounceDialog(this, true, "Error", "Login or password is empty").setVisible(true);
+                new AnnounceDialog(this, "Login or password is empty").setVisible(true);
                 return;
             }
 
             if (user == null) {
-                new AnnounceDialog(this, true, "Error", "Login or password is incorrect").setVisible(true);
+                new AnnounceDialog(this, "Login or password is incorrect").setVisible(true);
                 return;
             }
 
