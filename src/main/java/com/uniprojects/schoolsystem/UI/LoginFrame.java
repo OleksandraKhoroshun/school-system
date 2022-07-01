@@ -1,14 +1,12 @@
 package com.uniprojects.schoolsystem.UI;
 
-import com.uniprojects.schoolsystem.SchoolSystemApplication;
 import com.uniprojects.schoolsystem.models.Student;
 import com.uniprojects.schoolsystem.models.User;
+import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.HashMap;
-import java.util.Map;
 
 public class LoginFrame extends JFrame {
 
@@ -68,18 +66,32 @@ public class LoginFrame extends JFrame {
         loginPanel.add(exitButton, constraints);
 
         loginButton.addActionListener(e -> {
-            dispose();
+//            String enteredLogin="ash";
+//            String enteredPassword="1";
 
-            String enteredLogin="ash";
-            String enteredPassword="1";
+            String enteredLogin = loginField.getText();
+            String enteredPassword = String.valueOf(passwordField.getPassword()); // TODO normal password check
 
-            String GET_URL = "http://localhost:8080/api/v1/students/login/"+enteredLogin+"/"+enteredPassword;
+            String GET_URL = "http://localhost:8080/api/v1/students/login/" + enteredLogin + "/" + enteredPassword;
 
-            RestTemplate restTemplate = new RestTemplate();
-            User user = restTemplate.getForObject(GET_URL, User.class);
-            //Student student = restTemplate.getForObject(GET_URL, Student.class);
+            User user;
+            try {
+                RestTemplate restTemplate = new RestTemplate();
+                //User user = restTemplate.getForObject(GET_URL, User.class);
+                user = restTemplate.getForObject(GET_URL, Student.class);
+            } catch (HttpClientErrorException ex) {
+                new AnnounceDialog(this, "Login or password is empty").setVisible(true);
+                return;
+            }
 
+            if (user == null) {
+                new AnnounceDialog(this, "Login or password is incorrect").setVisible(true);
+                return;
+            }
+
+            System.out.println(user.getFirst_name());
             UserFrame newUserFrame = new UserFrame(user);
+            dispose();
             newUserFrame.setVisible(true);
         });
 
