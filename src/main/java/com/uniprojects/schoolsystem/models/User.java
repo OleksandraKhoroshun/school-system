@@ -17,7 +17,7 @@ public abstract class User {
     private String login;
     private String pass;
 
-    public UserType getUserType(String login){
+    public static UserType getUserType(String login){
         String GET_URL = "http://localhost:8080/api/v1/students/login/" + login;
 
         User user;
