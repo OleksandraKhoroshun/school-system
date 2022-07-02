@@ -8,4 +8,5 @@ import org.springframework.data.repository.query.Param;
 public interface StudentRepository extends JpaRepository<Student,Long> {
 
     Student findByLoginAndPass(@Param("login") String login,@Param("pass") String pass);
+    Student findByLogin(@Param("login") String login);
 }

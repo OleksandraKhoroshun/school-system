@@ -26,6 +26,12 @@ public class StudentController {
     }
 
     @GetMapping
+    @RequestMapping("/login/{login}")
+    public Student get(@PathVariable String login){
+        return studentRepository.findByLogin(login);
+    }
+
+    @GetMapping
     @RequestMapping("/login/{login}/{pass}")
     public Student get(@PathVariable String login, @PathVariable String pass){
         return studentRepository.findByLoginAndPass(login,pass);

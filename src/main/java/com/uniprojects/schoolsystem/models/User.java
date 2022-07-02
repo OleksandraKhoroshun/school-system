@@ -1,9 +1,14 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.uniprojects.schoolsystem.UI.AnnounceDialog;
+import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.RestTemplate;
+
 import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class User {
+    private UserType userType;
     private String first_name;
     private String last_name;
     private String email;
@@ -11,6 +16,35 @@ public abstract class User {
 
     private String login;
     private String pass;
+
+    public UserType getUserType(String login){
+        String GET_URL = "http://localhost:8080/api/v1/students/login/" + login;
+
+        User user;
+        RestTemplate restTemplate = new RestTemplate();
+        try {
+            user = restTemplate.getForObject(GET_URL, Student.class);
+            return UserType.Student;
+        } catch (HttpClientErrorException ex) {
+            GET_URL = "http://localhost:8080/api/v1/teachers/login/" + login;
+
+            try {
+                user = restTemplate.getForObject(GET_URL, Teacher.class);
+                return UserType.Teacher;
+            } catch (HttpClientErrorException ex1) {
+
+            }
+        }
+        return null;
+    }
+
+    public UserType getUserType() {
+        return userType;
+    }
+
+    public void setUserType(UserType userType) {
+        this.userType = userType;
+    }
 
     public String getFirst_name() {
         return first_name;
