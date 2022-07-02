@@ -3,7 +3,6 @@ package com.uniprojects.schoolsystem.UI;
 import com.uniprojects.schoolsystem.models.User;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
 
 public class UserFrame extends JFrame {
@@ -21,7 +20,7 @@ public class UserFrame extends JFrame {
         GridBagConstraints constraints = new GridBagConstraints();
 
         mainLabel.setFont(TitleFont);
-        mainLabel.setText(user.getUserType().toString());
+        mainLabel.setText(user.getUsertype().toString());
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(20, 20, 0, 0);

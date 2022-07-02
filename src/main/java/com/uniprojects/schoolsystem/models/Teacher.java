@@ -14,6 +14,7 @@ public class Teacher extends User{
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long teacher_id;
 
+    private String usertype;
     private String first_name;
     private String last_name;
     private String title;
@@ -38,6 +39,14 @@ public class Teacher extends User{
     @OneToMany(mappedBy = "teacher")
     @JsonIgnore
     private List<LessonYear> lessonsYears;
+
+    public UserType getUsertype() {
+        return UserType.fromString(usertype);
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
+    }
 
     public List<LessonYear> getLessonsYears() {
         return lessonsYears;

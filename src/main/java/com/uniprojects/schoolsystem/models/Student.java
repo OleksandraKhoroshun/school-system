@@ -11,6 +11,7 @@ public class Student extends User{
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private Long student_id;
 
+    private String usertype;
     private String first_name;
     private String last_name;
     private String email;
@@ -23,6 +24,14 @@ public class Student extends User{
     private String login;
     private String pass;
 
+
+    public UserType getUsertype() {
+        return UserType.fromString(usertype);
+    }
+
+    public void setUsertype(String usertype) {
+        this.usertype = usertype;
+    }
 
     public String getLogin() {
         return login;

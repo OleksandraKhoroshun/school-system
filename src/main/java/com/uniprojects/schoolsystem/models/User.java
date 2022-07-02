@@ -1,6 +1,5 @@
 package com.uniprojects.schoolsystem.models;
 
-import com.uniprojects.schoolsystem.UI.AnnounceDialog;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
@@ -8,7 +7,7 @@ import javax.persistence.MappedSuperclass;
 
 @MappedSuperclass
 public abstract class User {
-    private UserType userType;
+    private String usertype;
     private String first_name;
     private String last_name;
     private String email;
@@ -38,12 +37,12 @@ public abstract class User {
         return null;
     }
 
-    public UserType getUserType() {
-        return userType;
+        public UserType getUsertype() {
+        return UserType.fromString(usertype);
     }
 
-    public void setUserType(UserType userType) {
-        this.userType = userType;
+    public void setUsertype(String userType) {
+        this.usertype = userType;
     }
 
     public String getFirst_name() {
