@@ -21,6 +21,7 @@ public class UserFrame extends JFrame {
         GridBagConstraints constraints = new GridBagConstraints();
 
         mainLabel.setFont(TitleFont);
+        mainLabel.setText(user.getUserType().toString());
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(20, 20, 0, 0);

@@ -1,12 +1,16 @@
 package com.uniprojects.schoolsystem.UI;
 
 import com.uniprojects.schoolsystem.models.Student;
+import com.uniprojects.schoolsystem.models.Teacher;
 import com.uniprojects.schoolsystem.models.User;
+import com.uniprojects.schoolsystem.models.UserType;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class LoginFrame extends JFrame {
 
@@ -66,22 +70,40 @@ public class LoginFrame extends JFrame {
         loginPanel.add(exitButton, constraints);
 
         loginButton.addActionListener(e -> {
-//            String enteredLogin="ash";
-//            String enteredPassword="1";
-
             String enteredLogin = loginField.getText();
             String enteredPassword = String.valueOf(passwordField.getPassword()); // TODO normal password check
 
-            String GET_URL = "http://localhost:8080/api/v1/students/login/" + enteredLogin + "/" + enteredPassword;
+            User user = null;
+            String GET_URL;
+            RestTemplate restTemplate = new RestTemplate();
 
-            User user;
-            try {
-                RestTemplate restTemplate = new RestTemplate();
-                //User user = restTemplate.getForObject(GET_URL, User.class);
-                user = restTemplate.getForObject(GET_URL, Student.class);
-            } catch (HttpClientErrorException ex) {
+            if (enteredLogin == null || enteredLogin.equals("") || enteredPassword.equals("")) {
                 new AnnounceDialog(this, "Login or password is empty").setVisible(true);
                 return;
+            }
+
+            UserType type;
+            try {
+                type = User.getUserType(enteredLogin); // throws exception on "ash" here
+            } catch (HttpServerErrorException ex) {
+                new AnnounceDialog(this, "Login or password is incorrect").setVisible(true);
+                return;
+            }
+
+            if (type == null) {
+                new AnnounceDialog(this, "Login or password is incorrect").setVisible(true);
+                return;
+            }
+
+            switch (type) {
+                case Student -> {
+                    GET_URL = "http://localhost:8080/api/v1/students/login/" + enteredLogin + "/" + enteredPassword;
+                    user = restTemplate.getForObject(GET_URL, Student.class);
+                }
+                case Teacher -> {
+                    GET_URL = "http://localhost:8080/api/v1/teachers/login/" + enteredLogin + "/" + enteredPassword;
+                    user = restTemplate.getForObject(GET_URL, Teacher.class);
+                }
             }
 
             if (user == null) {
