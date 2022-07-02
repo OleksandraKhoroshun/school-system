@@ -1,7 +1,7 @@
 package com.uniprojects.schoolsystem.models;
 
 public enum UserType {
-Student("student"),Teacher("teacher");
+Student("Student"),Teacher("Teacher");
 
     private String text;
 

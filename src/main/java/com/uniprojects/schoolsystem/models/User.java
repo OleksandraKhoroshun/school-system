@@ -23,16 +23,17 @@ public abstract class User {
         RestTemplate restTemplate = new RestTemplate();
         try {
             user = restTemplate.getForObject(GET_URL, Student.class);
-            return UserType.Student;
+            if(user!=null)return UserType.Student;
         } catch (HttpClientErrorException ex) {
-            GET_URL = "http://localhost:8080/api/v1/teachers/login/" + login;
 
-            try {
-                user = restTemplate.getForObject(GET_URL, Teacher.class);
-                return UserType.Teacher;
-            } catch (HttpClientErrorException ex1) {
+        }
+        GET_URL = "http://localhost:8080/api/v1/teachers/login/" + login;
 
-            }
+        try {
+            user = restTemplate.getForObject(GET_URL, Teacher.class);
+            if(user!=null) return UserType.Teacher;
+        } catch (HttpClientErrorException ex1) {
+
         }
         return null;
     }

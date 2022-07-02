@@ -85,6 +85,7 @@ public class LoginFrame extends JFrame {
             UserType type;
             try {
                 type = User.getUserType(enteredLogin); // throws exception on "ash" here
+                System.out.println(type);
             } catch (HttpServerErrorException ex) {
                 new AnnounceDialog(this, "Login or password is incorrect").setVisible(true);
                 return;
