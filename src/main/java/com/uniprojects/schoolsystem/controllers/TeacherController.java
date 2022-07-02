@@ -32,6 +32,12 @@ public class TeacherController {
         return teacherRepository.findByLogin(login);
     }
 
+    @GetMapping
+    @RequestMapping("login/{login}/{pass}")
+    public Teacher get(@PathVariable String login,@PathVariable String pass){
+        return teacherRepository.findByLoginAndPass(login,pass);
+    }
+
     @PostMapping
     public Teacher create(@RequestBody final Teacher teacher){
         return teacherRepository.saveAndFlush(teacher);
