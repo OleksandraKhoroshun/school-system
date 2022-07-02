@@ -89,7 +89,6 @@ public class LoginFrame extends JFrame {
                 return;
             }
 
-            System.out.println(user.getFirst_name());
             UserFrame newUserFrame = new UserFrame(user);
             dispose();
             newUserFrame.setVisible(true);
