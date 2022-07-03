@@ -1,14 +1,18 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "teachers")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "teacher_id")
 public class Teacher extends User{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -37,9 +41,18 @@ public class Teacher extends User{
     }
 
     @OneToMany(mappedBy = "teacher")
-    @JsonIgnore
+    //@JsonIgnore
     private List<LessonYear> lessonsYears;
 
+    public List<Lesson> getLessons(){
+        List<Lesson> result = new ArrayList<>();
+        if(lessonsYears!=null)
+            lessonsYears.forEach(lessonYear -> {
+                result.add(lessonYear.getLesson());
+            });
+
+        return result;
+    }
     public UserType getUsertype() {
         return UserType.fromString(usertype);
     }

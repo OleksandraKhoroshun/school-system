@@ -113,9 +113,9 @@ public class LoginFrame extends JFrame {
             }
 
             //test
-            GET_URL = "http://localhost:8080/api/v1/students/1";
-            Student student =restTemplate.getForObject(GET_URL, Student.class);
-            System.out.println(student.getLessons());
+            GET_URL = "http://localhost:8080/api/v1/teachers/1";
+            Teacher t =restTemplate.getForObject(GET_URL, Teacher.class);
+            System.out.println(t.getLessons());
 
            UserFrame newUserFrame = new UserFrame(user);
             dispose();
