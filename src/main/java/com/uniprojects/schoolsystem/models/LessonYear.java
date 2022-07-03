@@ -1,13 +1,16 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.List;
 
 @Entity(name = "lessons_years")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "lesson_year_id")
 public class LessonYear {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

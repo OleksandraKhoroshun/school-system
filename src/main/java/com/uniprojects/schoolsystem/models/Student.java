@@ -3,6 +3,8 @@ package com.uniprojects.schoolsystem.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity(name = "students")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
@@ -24,6 +26,16 @@ public class Student extends User{
     private String login;
     private String pass;
 
+    public List<Lesson> getLessons(){
+        List<Lesson> result = new ArrayList<>();
+        List<LessonYear> lessonsYears =  year.getLessonsYears();
+        if(lessonsYears!=null)
+            lessonsYears.forEach(lessonYear -> {
+                result.add(lessonYear.getLesson());
+            });
+
+        return result;
+    }
 
     public UserType getUsertype() {
         return UserType.fromString(usertype);

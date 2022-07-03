@@ -85,7 +85,7 @@ public class LoginFrame extends JFrame {
             UserType type;
             try {
                 type = User.getUserType(enteredLogin); // throws exception on "ash" here
-                System.out.println(type);
+                //System.out.println(type);
             } catch (HttpServerErrorException ex) {
                 new AnnounceDialog(this, "Login or password is incorrect").setVisible(true);
                 return;
@@ -112,8 +112,12 @@ public class LoginFrame extends JFrame {
                 return;
             }
 
-            System.out.println(user.getUsertype()+user.getFirst_name());
-            UserFrame newUserFrame = new UserFrame(user);
+            //test
+            GET_URL = "http://localhost:8080/api/v1/students/1";
+            Student student =restTemplate.getForObject(GET_URL, Student.class);
+            System.out.println(student.getLessons());
+
+           UserFrame newUserFrame = new UserFrame(user);
             dispose();
             newUserFrame.setVisible(true);
         });
