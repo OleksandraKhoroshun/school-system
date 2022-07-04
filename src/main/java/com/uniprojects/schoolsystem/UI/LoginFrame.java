@@ -1,16 +1,20 @@
 package com.uniprojects.schoolsystem.UI;
 
-import com.uniprojects.schoolsystem.models.Student;
-import com.uniprojects.schoolsystem.models.Teacher;
-import com.uniprojects.schoolsystem.models.User;
-import com.uniprojects.schoolsystem.models.UserType;
+import com.uniprojects.schoolsystem.DBManager;
+import com.uniprojects.schoolsystem.controllers.TeacherController;
+import com.uniprojects.schoolsystem.models.*;
+import com.uniprojects.schoolsystem.repositories.TeacherRepository;
 import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
+import java.util.TreeMap;
 
 public class LoginFrame extends JFrame {
 
@@ -113,11 +117,20 @@ public class LoginFrame extends JFrame {
             }
 
             //test
-            GET_URL = "http://localhost:8080/api/v1/teachers/1";
-            Teacher t =restTemplate.getForObject(GET_URL, Teacher.class);
-            System.out.println(t.getLessons());
+            GET_URL = "http://localhost:8080/api/v1/lessons";
+            Map<String,String> teacher3 = new TreeMap<>(){{
+                put("\"lesson_id\"", "9");
+                put("\"lesson_name\"", "\"PE\"");
+                put("\"lesson_description\"", "\"pe lesson\"");
+                put("\"lesson_length\"","45");
+            }};
+            try {
+                DBManager.post(GET_URL,teacher3);
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
 
-           UserFrame newUserFrame = new UserFrame(user);
+            UserFrame newUserFrame = new UserFrame(user);
             dispose();
             newUserFrame.setVisible(true);
         });

@@ -36,6 +36,7 @@ public class LessonYear {
     @JsonIgnore
     private List<LessonSchedule> lessonSchedules;
 
+
     public Teacher getTeacher() {
         return teacher;
     }
