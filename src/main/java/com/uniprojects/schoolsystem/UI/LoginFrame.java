@@ -140,22 +140,22 @@ public class LoginFrame extends JFrame {
 
            // a3.getFile();
 
-            GET_URL = "http://localhost:8080/api/v1/lesson_schedule";
-            Map<String,String> ls = new LinkedHashMap<>(){{
-                put("\"schedule_id\"", "7");
-                put("\"time_slot_id\"", "5");
-                put("\"room\"", "\"1\"");
-                put("\"day_id\"", "1");
-                put("\"lesson_year_id\"", "1");
-                put("\"topic\"", "\"some topic\"");
-                put("\"task\"", "\"do something\"");
-                put("\"assignment_id\"", "3");
-            }};
-            try {
-                DBManager.post(GET_URL,ls);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
+//            GET_URL = "http://localhost:8080/api/v1/lesson_schedule";
+//            Map<String,String> ls = new LinkedHashMap<>(){{
+//                put("\"schedule_id\"", "7");
+//                put("\"time_slot_id\"", "5");
+//                put("\"room\"", "\"1\"");
+//                put("\"day_id\"", "1");
+//                put("\"lesson_year_id\"", "1");
+//                put("\"topic\"", "\"some topic\"");
+//                put("\"task\"", "\"do something\"");
+//                put("\"assignment_id\"", "3");
+//            }};
+//            try {
+//                DBManager.post(GET_URL,ls);
+//            } catch (IOException ex) {
+//                ex.printStackTrace();
+//            }
 
 
             UserFrame newUserFrame = new UserFrame(user);

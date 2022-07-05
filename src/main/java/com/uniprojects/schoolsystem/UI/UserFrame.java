@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserFrame extends JFrame {
@@ -101,8 +99,12 @@ public class UserFrame extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-
-                mainLabel.setText(list.getSelectedValue().getLesson_name());
+                for (LessonYear ly : list.getSelectedValue().getLessonsYears()) {
+                    if (ly.getLesson() == list.getSelectedValue()) { // yes, I compare pointers, I use c++
+                        new AssignmentsFrame(user, ly).setVisible(true);
+                        return;
+                    }
+                }
             }
         });
 
@@ -111,10 +113,12 @@ public class UserFrame extends JFrame {
 
     private JTable makeSchedule() {
         String[] headers = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-        String[][] data = new String[4][8];
-        data[1][0] = "8:30 - 9:15";
-        data[2][0] = "9:25 - 10:10";
-        data[3][0] = "10:20 - 11:05";
+        String[][] data = new String[5][8];
+        data[0][0] = "8:30 - 9:15";
+        data[1][0] = "9:25 - 10:10";
+        data[2][0] = "10:20 - 11:05";
+        data[3][0] = "11:25 - 12:10";
+        data[4][0] = "12:30 - 13:15";
         
         List<LessonYear> lessonYears;
         switch (user.getUsertype()) {
@@ -131,7 +135,7 @@ public class UserFrame extends JFrame {
 
         for (LessonYear ly : lessonYears) {
             for (LessonSchedule ls : ly.getLessonSchedules()) {
-                data[Math.toIntExact(ls.getTimeSlot().getTime_slot_id())][Math.toIntExact(ls.getDay().getDay_id())] = ly.getLesson().getLesson_name();
+                data[Math.toIntExact(ls.getTimeSlot().getTime_slot_id()) - 1][Math.toIntExact(ls.getDay().getDay_id())] = ly.getLesson().getLesson_name();
             }
         }
 

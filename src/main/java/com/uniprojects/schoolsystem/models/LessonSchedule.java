@@ -96,4 +96,8 @@ public class LessonSchedule {
     public void setLessonYear(LessonYear lessonYear) {
         this.lessonYear = lessonYear;
     }
+
+    public String toString() {
+        return "Topic: " + topic + ", due " + day.getDay_name();
+    }
 }
