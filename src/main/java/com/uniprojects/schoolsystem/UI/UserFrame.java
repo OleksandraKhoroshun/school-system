@@ -66,15 +66,39 @@ public class UserFrame extends JFrame {
 
         GridBagConstraints constraints = new GridBagConstraints();
 
-        JList<Lesson> list = new JList<>(user.getLessons().toArray(new Lesson[0]));
-        list.setFont(BaseFont);
+        JLabel courseListLabel = new JLabel("Your courses:");
+        courseListLabel.setFont(BaseFont);
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
-        constraints.weightx = 1;
-        constraints.weighty = 1;
+        constraints.weightx = 0.2;
+        constraints.weighty = 0.1;
+        constraints.insets = new Insets(20, 20, 0, 0);
+
+        panel.add(courseListLabel, constraints);
+
+        JLabel scheduleLabel = new JLabel("Schedule:");
+        scheduleLabel.setFont(BaseFont);
+        constraints.gridx = 1;
+        constraints.weightx = 0.8;
+
+        panel.add(scheduleLabel, constraints);
+
+        JList<Lesson> list = new JList<>(user.getLessons().toArray(new Lesson[0]));
+        list.setFont(BaseFont);
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.weightx = 0.2;
+        constraints.weighty = 0.9;
 
         panel.add(list, constraints);
+
+        JTable scheduleTable = makeSchedule();
+        constraints.gridx = 1;
+        constraints.weightx = 0.8;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+
+        panel.add(new JScrollPane(scheduleTable), constraints);
 
         return panel;
     }
@@ -83,6 +107,20 @@ public class UserFrame extends JFrame {
         JPanel panel = new JPanel(new GridBagLayout());
 
         return panel;
+    }
+
+    private JTable makeSchedule() {
+        String[] headers = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
+        String[][] data = new String[4][8];
+        data[1][0] = "8:30 - 9:15";
+        data[2][0] = "9:25 - 10:10";
+        data[3][0] = "10:20 - 11:05";
+
+        JTable schedule = new JTable(data, headers);
+        schedule.setFont(BaseFont);
+        schedule.setRowHeight(30);
+
+        return schedule;
     }
 
     protected JPanel mainPanel = new JPanel(new GridBagLayout());
