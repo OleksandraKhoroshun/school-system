@@ -28,8 +28,8 @@ public class UserFrame extends JFrame {
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(20, 20, 0, 0);
-        constraints.weightx = 0.5;
-        constraints.weighty = 0.5;
+        constraints.weightx = 1;
+        constraints.weighty = 0.1;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
 
         mainPanel.add(mainLabel, constraints);
@@ -54,8 +54,8 @@ public class UserFrame extends JFrame {
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.fill = GridBagConstraints.BOTH;
-        constraints.weightx = 0.0;
-        constraints.weighty = 0.0;
+        constraints.weightx = 1;
+        constraints.weighty = 0.9;
         mainPanel.add(userPanel, constraints);
 
         add(mainPanel);
@@ -68,11 +68,11 @@ public class UserFrame extends JFrame {
 
         JList<Lesson> list = new JList<>(user.getLessons().toArray(new Lesson[0]));
         list.setFont(BaseFont);
-
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.anchor = GridBagConstraints.LINE_START;
-        constraints.weightx = 0.5;
+        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
 
         panel.add(list, constraints);
 
@@ -80,7 +80,9 @@ public class UserFrame extends JFrame {
     }
 
     private JPanel teacherPanel() {
-        return null;
+        JPanel panel = new JPanel(new GridBagLayout());
+
+        return panel;
     }
 
     protected JPanel mainPanel = new JPanel(new GridBagLayout());
