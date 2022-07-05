@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserFrame extends JFrame {
@@ -102,7 +100,12 @@ public class UserFrame extends JFrame {
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
 
-                mainLabel.setText(list.getSelectedValue().getLesson_name());
+                for (LessonYear ly : list.getSelectedValue().getLessonsYears()) {
+                    if (ly.getLesson() == list.getSelectedValue()) { // yes, I compare pointers, I use c++
+                        new AssignmentsFrame((Student) user, ly).setVisible(true);
+                        return;
+                    }
+                }
             }
         });
 
