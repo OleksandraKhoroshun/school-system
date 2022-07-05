@@ -1,9 +1,13 @@
 package com.uniprojects.schoolsystem.UI;
 
+import com.uniprojects.schoolsystem.models.Lesson;
 import com.uniprojects.schoolsystem.models.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class UserFrame extends JFrame {
     public UserFrame(User user) {
@@ -24,8 +28,8 @@ public class UserFrame extends JFrame {
         constraints.gridx = 0;
         constraints.gridy = 0;
         constraints.insets = new Insets(20, 20, 0, 0);
-        constraints.weightx = 0.5;
-        constraints.weighty = 0.5;
+        constraints.weightx = 1;
+        constraints.weighty = 0.1;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
 
         mainPanel.add(mainLabel, constraints);
@@ -38,22 +42,51 @@ public class UserFrame extends JFrame {
 
         mainPanel.add(nameLabel, constraints);
 
-        // make user panel
+        switch (user.getUsertype()) {
+            case Student -> userPanel = studentPanel();
+            case Teacher -> userPanel = teacherPanel();
+        }
+
+        userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         constraints.gridx = 0;
         constraints.gridy = 1;
         constraints.gridwidth = 2;
         constraints.anchor = GridBagConstraints.CENTER;
         constraints.fill = GridBagConstraints.BOTH;
-        constraints.weightx = 0.0;
-        constraints.weighty = 0.0;
+        constraints.weightx = 1;
+        constraints.weighty = 0.9;
         mainPanel.add(userPanel, constraints);
 
         add(mainPanel);
     }
 
+    private JPanel studentPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        JList<Lesson> list = new JList<>(user.getLessons().toArray(new Lesson[0]));
+        list.setFont(BaseFont);
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.anchor = GridBagConstraints.FIRST_LINE_START;
+        constraints.weightx = 1;
+        constraints.weighty = 1;
+
+        panel.add(list, constraints);
+
+        return panel;
+    }
+
+    private JPanel teacherPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+
+        return panel;
+    }
+
     protected JPanel mainPanel = new JPanel(new GridBagLayout());
-    protected JPanel userPanel = new JPanel(new GridBagLayout());
+    protected JPanel userPanel;
     protected JLabel mainLabel = new JLabel("School System");
     protected JLabel nameLabel = new JLabel("Name Surname (maybe photo)");
 
