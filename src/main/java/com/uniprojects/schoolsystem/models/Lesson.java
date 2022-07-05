@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity(name = "lessons")
@@ -24,6 +25,16 @@ public class Lesson {
     @OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = CascadeType.PERSIST)
    // @JsonIgnore
     private List<LessonYear> lessonsYears;
+
+    /*public List<LessonSchedule> getSchedule(){
+        List<LessonSchedule> result = new ArrayList<>();
+        if(lessonsYears!=null)
+            lessonsYears.forEach(lessonYear -> {
+                result.add(lessonYear.getLessonSchedules());
+            });
+
+        return result;
+    }*/
 
     public List<LessonYear> getLessonsYears() {
         return lessonsYears;

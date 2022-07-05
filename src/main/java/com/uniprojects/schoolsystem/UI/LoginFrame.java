@@ -11,7 +11,9 @@ import org.springframework.web.client.RestTemplate;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.TreeMap;
@@ -129,6 +131,43 @@ public class LoginFrame extends JFrame {
             } catch (IOException ex) {
                 ex.printStackTrace();
             }*/
+
+            GET_URL = "http://localhost:8080/api/v1/teachers/1";
+            Teacher teach = restTemplate.getForObject(GET_URL, Teacher.class);
+            teach.getLessonsYears().forEach(ly -> {
+                Lesson l = ly.getLesson();
+                Year y = ly.getYear();
+                System.out.println("lesson: "+l.getLesson_name()+" ; year: "+y.getYear_id());
+                List<LessonSchedule> ls = ly.getLessonSchedules();
+
+                ls.forEach(lessonSchedule -> {
+                    TimeSlot t = lessonSchedule.getTimeSlot();
+                    Day d = lessonSchedule.getDay();
+                    String task = lessonSchedule.getTask();
+                    String topic = lessonSchedule.getTopic();
+                    System.out.println("time: "+t.getStart_time()+" - "+t.getEnd_time()+
+                            " ; day: "+d.getDay_name());
+                });
+
+            });
+
+            GET_URL = "http://localhost:8080/api/v1/students/1";
+            Student stud = restTemplate.getForObject(GET_URL, Student.class);
+            stud.getYear().getLessonsYears().forEach(ly -> {
+                Lesson l = ly.getLesson();
+                Year y = ly.getYear();
+                System.out.println("lesson: "+l.getLesson_name()+" ; year: "+y.getYear_id()+" ; teacher: "
+                +ly.getTeacher().getFirst_name());
+                List<LessonSchedule> ls = ly.getLessonSchedules();
+
+                ls.forEach(lessonSchedule -> {
+                    TimeSlot t = lessonSchedule.getTimeSlot();
+                    Day d = lessonSchedule.getDay();
+
+                    System.out.println("time: "+t.getStart_time()+" - "+t.getEnd_time()+
+                            " ; day: "+d.getDay_name());
+                });
+            });
 
             UserFrame newUserFrame = new UserFrame(user);
             dispose();

@@ -40,6 +40,17 @@ public class Student extends User{
         return result;
     }
 
+    /*public List<LessonSchedule> getSchedule(){
+        List<LessonSchedule> result = new ArrayList<>();
+        List<LessonYear> lessonsYears =  year.getLessonsYears();
+        if(lessonsYears!=null)
+            lessonsYears.forEach(lessonYear -> {
+                result.add(lessonYear.getLessonSchedules());
+            });
+
+        return result;
+    }*/
+
     public UserType getUsertype() {
         return UserType.fromString(usertype);
     }

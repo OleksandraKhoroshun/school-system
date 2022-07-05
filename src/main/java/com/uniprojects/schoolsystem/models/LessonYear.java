@@ -33,7 +33,7 @@ public class LessonYear {
     private Teacher teacher;
 
     @OneToMany(mappedBy = "lessonYear", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    @JsonIgnore
+    //@JsonIgnore
     private List<LessonSchedule> lessonSchedules;
 
 

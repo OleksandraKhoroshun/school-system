@@ -13,6 +13,8 @@ public class LessonSchedule {
     private Long schedule_id;
 
     private String room;
+    private String topic;
+    private String task;
 
     @ManyToOne
     @JoinColumn(name="time_slot_id")
@@ -26,6 +28,22 @@ public class LessonSchedule {
 
     public LessonSchedule(){
 
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getTask() {
+        return task;
+    }
+
+    public void setTask(String task) {
+        this.task = task;
     }
 
     public Long getSchedule_id() {
