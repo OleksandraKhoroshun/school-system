@@ -114,10 +114,12 @@ public class UserFrame extends JFrame {
 
     private JTable makeSchedule() {
         String[] headers = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
-        String[][] data = new String[3][8];
+        String[][] data = new String[5][8];
         data[0][0] = "8:30 - 9:15";
         data[1][0] = "9:25 - 10:10";
         data[2][0] = "10:20 - 11:05";
+        data[3][0] = "11:25 - 12:10";
+        data[4][0] = "12:30 - 13:15";
         
         List<LessonYear> lessonYears;
         switch (user.getUsertype()) {
