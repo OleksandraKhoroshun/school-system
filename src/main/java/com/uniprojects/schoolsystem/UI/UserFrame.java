@@ -1,13 +1,13 @@
 package com.uniprojects.schoolsystem.UI;
 
-import com.uniprojects.schoolsystem.models.Lesson;
-import com.uniprojects.schoolsystem.models.User;
+import com.uniprojects.schoolsystem.models.*;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
+import java.util.List;
 
 public class UserFrame extends JFrame {
     public UserFrame(User user) {
@@ -42,11 +42,7 @@ public class UserFrame extends JFrame {
 
         mainPanel.add(nameLabel, constraints);
 
-        switch (user.getUsertype()) {
-            case Student -> userPanel = studentPanel();
-            case Teacher -> userPanel = teacherPanel();
-        }
-
+        userPanel = makePanel();
         userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         constraints.gridx = 0;
@@ -61,7 +57,7 @@ public class UserFrame extends JFrame {
         add(mainPanel);
     }
 
-    private JPanel studentPanel() {
+    private JPanel makePanel() {
         JPanel panel = new JPanel(new GridBagLayout());
 
         GridBagConstraints constraints = new GridBagConstraints();
@@ -103,18 +99,31 @@ public class UserFrame extends JFrame {
         return panel;
     }
 
-    private JPanel teacherPanel() {
-        JPanel panel = new JPanel(new GridBagLayout());
-
-        return panel;
-    }
-
     private JTable makeSchedule() {
         String[] headers = { "Time", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday" };
         String[][] data = new String[4][8];
         data[1][0] = "8:30 - 9:15";
         data[2][0] = "9:25 - 10:10";
         data[3][0] = "10:20 - 11:05";
+        
+        List<LessonYear> lessonYears;
+        switch (user.getUsertype()) {
+            case Student -> {
+                Student student = (Student) user;
+                lessonYears = student.getYear().getLessonsYears();
+            }
+            case Teacher -> {
+                Teacher teacher = (Teacher) user;
+                lessonYears = teacher.getLessonsYears();
+            }
+            default -> throw new IllegalStateException("Unexpected value: " + user.getUsertype());
+        }
+
+        for (LessonYear ly : lessonYears) {
+            for (LessonSchedule ls : ly.getLessonSchedules()) {
+                data[Math.toIntExact(ls.getTimeSlot().getTime_slot_id())][Math.toIntExact(ls.getDay().getDay_id())] = ly.getLesson().getLesson_name();
+            }
+        }
 
         JTable schedule = new JTable(data, headers);
         schedule.setFont(BaseFont);
