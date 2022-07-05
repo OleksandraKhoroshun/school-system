@@ -2,16 +2,18 @@ package com.uniprojects.schoolsystem.UI;
 
 import com.uniprojects.schoolsystem.models.LessonSchedule;
 import com.uniprojects.schoolsystem.models.LessonYear;
-import com.uniprojects.schoolsystem.models.Student;
+import com.uniprojects.schoolsystem.models.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class AssignmentsFrame extends JFrame {
-    public AssignmentsFrame(Student student, LessonYear lessonYear) {
+    public AssignmentsFrame(User user, LessonYear lessonYear) {
         super();
 
-        this.student = student;
+        this.user = user;
         this.lessonYear = lessonYear;
 
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -25,19 +27,45 @@ public class AssignmentsFrame extends JFrame {
         assignmentsLabel.setFont(TitleFont);
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.weightx = 1;
+        constraints.weightx = 0.2;
         constraints.weighty = 0.1;
         constraints.anchor = GridBagConstraints.FIRST_LINE_START;
         constraints.insets = new Insets(20, 20, 0, 0);
 
         mainPanel.add(assignmentsLabel, constraints);
 
-        constraints.gridy = 1;
-        constraints.weighty = 0.9;
+        taskLabel.setFont(TitleFont);
+        constraints.gridx = 1;
+        constraints.weightx = 0.8;
+
+        mainPanel.add(taskLabel, constraints);
 
         assignments = makeAssignments();
 
+        constraints.gridx = 0;
+        constraints.gridy = 1;
+        constraints.weightx = 0.2;
+        constraints.weighty = 0.9;
+
         mainPanel.add(assignments, constraints);
+
+        taskArea.setEditable(false);
+        taskArea.setFont(BaseFont);
+
+        constraints.gridx = 1;
+        constraints.weightx = 0.8;
+        constraints.fill = GridBagConstraints.BOTH;
+
+        mainPanel.add(taskArea, constraints);
+
+        assignments.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseReleased(MouseEvent e) {
+                super.mouseReleased(e);
+
+                taskArea.setText(assignments.getSelectedValue().getTask());
+            }
+        });
 
         add(mainPanel);
     }
@@ -51,9 +79,11 @@ public class AssignmentsFrame extends JFrame {
 
     protected JPanel mainPanel = new JPanel(new GridBagLayout());
     protected JLabel assignmentsLabel = new JLabel("Assignments:");
+    protected JLabel taskLabel = new JLabel("Task:");
     protected JList<LessonSchedule> assignments;
+    protected JTextArea taskArea = new JTextArea();
 
-    private final Student student;
+    private final User user;
     private final LessonYear lessonYear;
 
     private static final Font TitleFont = new Font("OCR A Extended", Font.ITALIC, 30);
