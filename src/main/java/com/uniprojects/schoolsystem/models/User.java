@@ -4,6 +4,7 @@ import org.springframework.web.client.HttpClientErrorException;
 import org.springframework.web.client.RestTemplate;
 
 import javax.persistence.MappedSuperclass;
+import java.util.List;
 
 @MappedSuperclass
 public abstract class User {
@@ -93,4 +94,6 @@ public abstract class User {
     public void setPass(String pass) {
         this.pass = pass;
     }
+
+    public abstract List<Lesson> getLessons();
 }

@@ -68,4 +68,8 @@ public class Lesson {
     public void setLesson_length(Integer lesson_length) {
         this.lesson_length = lesson_length;
     }
+
+    public String toString() {
+        return lesson_name;
+    }
 }

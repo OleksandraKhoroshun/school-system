@@ -1,9 +1,13 @@
 package com.uniprojects.schoolsystem.UI;
 
+import com.uniprojects.schoolsystem.models.Lesson;
 import com.uniprojects.schoolsystem.models.User;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 public class UserFrame extends JFrame {
     public UserFrame(User user) {
@@ -38,7 +42,12 @@ public class UserFrame extends JFrame {
 
         mainPanel.add(nameLabel, constraints);
 
-        // make user panel
+        switch (user.getUsertype()) {
+            case Student -> userPanel = studentPanel();
+            case Teacher -> userPanel = teacherPanel();
+        }
+
+        userPanel.setBorder(BorderFactory.createLineBorder(Color.BLACK));
 
         constraints.gridx = 0;
         constraints.gridy = 1;
@@ -52,8 +61,30 @@ public class UserFrame extends JFrame {
         add(mainPanel);
     }
 
+    private JPanel studentPanel() {
+        JPanel panel = new JPanel(new GridBagLayout());
+
+        GridBagConstraints constraints = new GridBagConstraints();
+
+        JList<Lesson> list = new JList<>(user.getLessons().toArray(new Lesson[0]));
+        list.setFont(BaseFont);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.anchor = GridBagConstraints.LINE_START;
+        constraints.weightx = 0.5;
+
+        panel.add(list, constraints);
+
+        return panel;
+    }
+
+    private JPanel teacherPanel() {
+        return null;
+    }
+
     protected JPanel mainPanel = new JPanel(new GridBagLayout());
-    protected JPanel userPanel = new JPanel(new GridBagLayout());
+    protected JPanel userPanel;
     protected JLabel mainLabel = new JLabel("School System");
     protected JLabel nameLabel = new JLabel("Name Surname (maybe photo)");
 
