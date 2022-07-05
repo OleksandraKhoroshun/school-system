@@ -1,12 +1,13 @@
 package com.uniprojects.schoolsystem.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-
+import org.apache.tomcat.util.http.fileupload.FileUtils;
+import java.nio.file.Files;
 import javax.persistence.*;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 @Entity(name = "assignments")
@@ -15,7 +16,7 @@ import java.util.List;
 public class Assignment {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
-    private int assignment_id;
+    private Long assignment_id;
     private int grade;
 
     private String pathway;
@@ -23,22 +24,34 @@ public class Assignment {
     @OneToMany(mappedBy = "assignment")
     private List<LessonSchedule> lessonschedules;
 
+    @Transient
+    @JsonIgnore
+    private String name;
+
     public Assignment(){
 
     }
 
-    public void createFile(){
-        try {
-            File myObj = new File(pathway);
-            if (myObj.createNewFile()) {
-                System.out.println("File created: " + myObj.getName());
-            } else {
-                System.out.println("File already exists.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
-        }
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void handIn(String name) throws IOException {
+        this.name=name;
+        File source = new File(pathway+"\\"+name);
+        File dest = new File("C:\\test\\"+name);
+        Files.copy(source.toPath(), dest.toPath());
+    }
+
+    @Transient
+    @JsonIgnore
+    public File getFile(){
+        File source = new File(name);
+        return source;
     }
 
     public List<LessonSchedule> getLessonschedules() {
@@ -49,11 +62,11 @@ public class Assignment {
         this.lessonschedules = lessonschedules;
     }
 
-    public int getAssignment_id() {
+    public Long getAssignment_id() {
         return assignment_id;
     }
 
-    public void setAssignment_id(int assignment_id) {
+    public void setAssignment_id(Long assignment_id) {
         this.assignment_id = assignment_id;
     }
 

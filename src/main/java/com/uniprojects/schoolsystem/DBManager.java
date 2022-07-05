@@ -36,6 +36,7 @@ public class DBManager {
             if(fields.size()>i)jsonString+=", ";
         }
         jsonString+="}";
+        System.out.println(jsonString);
 
         try(OutputStream os = conn.getOutputStream()) {
             byte[] input = jsonString.getBytes("utf-8");
