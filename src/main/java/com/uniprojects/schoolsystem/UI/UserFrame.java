@@ -99,11 +99,12 @@ public class UserFrame extends JFrame {
             @Override
             public void mouseReleased(MouseEvent e) {
                 super.mouseReleased(e);
-
-                for (LessonYear ly : list.getSelectedValue().getLessonsYears()) {
-                    if (ly.getLesson() == list.getSelectedValue()) { // yes, I compare pointers, I use c++
-                        new AssignmentsFrame((Student) user, ly).setVisible(true);
-                        return;
+                if (user.getUsertype() == UserType.Student) {
+                    for (LessonYear ly : list.getSelectedValue().getLessonsYears()) {
+                        if (ly.getLesson() == list.getSelectedValue()) { // yes, I compare pointers, I use c++
+                            new AssignmentsFrame((Student) user, ly).setVisible(true);
+                            return;
+                        }
                     }
                 }
             }
