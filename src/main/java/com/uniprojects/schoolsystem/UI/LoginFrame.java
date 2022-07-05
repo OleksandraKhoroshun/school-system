@@ -117,58 +117,7 @@ public class LoginFrame extends JFrame {
                 new AnnounceDialog(this, "Login or password is incorrect").setVisible(true);
                 return;
             }
-
-            //test
-            /*GET_URL = "http://localhost:8080/api/v1/lessons";
-            Map<String,String> teacher3 = new TreeMap<>(){{
-                put("\"lesson_id\"", "7");
-                put("\"lesson_name\"", "\"PE\"");
-                put("\"lesson_description\"", "\"pe lesson\"");
-                put("\"lesson_length\"","45");
-            }};
-            try {
-                DBManager.post(GET_URL,teacher3);
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }*/
-
-            GET_URL = "http://localhost:8080/api/v1/teachers/1";
-            Teacher teach = restTemplate.getForObject(GET_URL, Teacher.class);
-            teach.getLessonsYears().forEach(ly -> {
-                Lesson l = ly.getLesson();
-                Year y = ly.getYear();
-                System.out.println("lesson: "+l.getLesson_name()+" ; year: "+y.getYear_id());
-                List<LessonSchedule> ls = ly.getLessonSchedules();
-
-                ls.forEach(lessonSchedule -> {
-                    TimeSlot t = lessonSchedule.getTimeSlot();
-                    Day d = lessonSchedule.getDay();
-                    String task = lessonSchedule.getTask();
-                    String topic = lessonSchedule.getTopic();
-                    System.out.println("time: "+t.getStart_time()+" - "+t.getEnd_time()+
-                            " ; day: "+d.getDay_name());
-                });
-
-            });
-
-            GET_URL = "http://localhost:8080/api/v1/students/1";
-            Student stud = restTemplate.getForObject(GET_URL, Student.class);
-            stud.getYear().getLessonsYears().forEach(ly -> {
-                Lesson l = ly.getLesson();
-                Year y = ly.getYear();
-                System.out.println("lesson: "+l.getLesson_name()+" ; year: "+y.getYear_id()+" ; teacher: "
-                +ly.getTeacher().getFirst_name());
-                List<LessonSchedule> ls = ly.getLessonSchedules();
-
-                ls.forEach(lessonSchedule -> {
-                    TimeSlot t = lessonSchedule.getTimeSlot();
-                    Day d = lessonSchedule.getDay();
-
-                    System.out.println("time: "+t.getStart_time()+" - "+t.getEnd_time()+
-                            " ; day: "+d.getDay_name());
-                });
-            });
-
+            
             UserFrame newUserFrame = new UserFrame(user);
             dispose();
             newUserFrame.setVisible(true);

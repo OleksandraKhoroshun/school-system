@@ -25,9 +25,20 @@ public class LessonSchedule {
     @ManyToOne
     @JoinColumn(name="lesson_year_id")
     private LessonYear lessonYear;
+    @ManyToOne
+    @JoinColumn(name="assignment_id")
+    private Assignment assignment;
 
     public LessonSchedule(){
 
+    }
+
+    public Assignment getAssignment() {
+        return assignment;
+    }
+
+    public void setAssignment(Assignment assignment) {
+        this.assignment = assignment;
     }
 
     public String getTopic() {

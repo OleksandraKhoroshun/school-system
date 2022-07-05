@@ -95,5 +95,7 @@ public abstract class User {
         this.pass = pass;
     }
 
-    public abstract List<Lesson> getLessons();
+    //public abstract List<Lesson> getLessons();
+
+
 }
