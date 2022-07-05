@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity(name = "years")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "year_id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "year_id", scope = Year.class)
 public class Year {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

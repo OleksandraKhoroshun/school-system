@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity(name = "teachers")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
-@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "teacher_id")
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "teacher_id", scope = Teacher.class)
 public class Teacher extends User{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

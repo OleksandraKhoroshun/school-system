@@ -1,6 +1,8 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -8,6 +10,7 @@ import java.util.List;
 
 @Entity(name = "students")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "student_id", scope = Student.class)
 public class Student extends User{
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)

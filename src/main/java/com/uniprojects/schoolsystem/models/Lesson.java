@@ -1,7 +1,9 @@
 package com.uniprojects.schoolsystem.models;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import org.hibernate.annotations.NaturalId;
 
 import javax.persistence.*;
@@ -9,6 +11,7 @@ import java.util.List;
 
 @Entity(name = "lessons")
 @JsonIgnoreProperties({"hibernateLazyInitializer","handler"})
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "lesson_id", scope = Lesson.class)
 public class Lesson {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
@@ -19,7 +22,7 @@ public class Lesson {
 
 
     @OneToMany(mappedBy = "lesson", orphanRemoval = true, cascade = CascadeType.PERSIST)
-    @JsonIgnore
+   // @JsonIgnore
     private List<LessonYear> lessonsYears;
 
     public List<LessonYear> getLessonsYears() {

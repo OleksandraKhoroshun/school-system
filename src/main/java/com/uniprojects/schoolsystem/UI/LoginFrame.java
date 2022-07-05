@@ -117,9 +117,9 @@ public class LoginFrame extends JFrame {
             }
 
             //test
-            GET_URL = "http://localhost:8080/api/v1/lessons";
+            /*GET_URL = "http://localhost:8080/api/v1/lessons";
             Map<String,String> teacher3 = new TreeMap<>(){{
-                put("\"lesson_id\"", "9");
+                put("\"lesson_id\"", "7");
                 put("\"lesson_name\"", "\"PE\"");
                 put("\"lesson_description\"", "\"pe lesson\"");
                 put("\"lesson_length\"","45");
@@ -128,7 +128,7 @@ public class LoginFrame extends JFrame {
                 DBManager.post(GET_URL,teacher3);
             } catch (IOException ex) {
                 ex.printStackTrace();
-            }
+            }*/
 
             UserFrame newUserFrame = new UserFrame(user);
             dispose();
