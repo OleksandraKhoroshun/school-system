@@ -18,29 +18,13 @@ public class Assignment {
     private int assignment_id;
     private int grade;
 
-    private Long schedule_id;
-
     private String pathway;
 
-    @OneToMany(mappedBy = "assignment", orphanRemoval = true, cascade = CascadeType.PERSIST)
+    @OneToMany(mappedBy = "assignment")
     private List<LessonSchedule> lessonschedules;
 
     public Assignment(){
 
-    }
-
-    public Assignment(int grade, Long lesson_schedule_id, String path) {
-        this.grade = grade;
-        this.schedule_id = lesson_schedule_id;
-        this.pathway = path;
-        createFile();
-    }
-
-    public Assignment( Long lesson_schedule_id, String path) {
-        this.grade = grade;
-        this.schedule_id = lesson_schedule_id;
-        this.pathway = path;
-        createFile();
     }
 
     public void createFile(){
@@ -81,20 +65,11 @@ public class Assignment {
         this.grade = grade;
     }
 
-    public Long getSchedule_id() {
-        return schedule_id;
-    }
-
-    public void setSchedule_id(Long lesson_year_id) {
-        this.schedule_id = schedule_id;
-    }
-
     public String getPathway() {
         return pathway;
     }
 
     public void setPathway(String pathway) {
         this.pathway = pathway;
-        createFile();
     }
 }

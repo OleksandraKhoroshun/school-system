@@ -117,7 +117,7 @@ public class LoginFrame extends JFrame {
                 new AnnounceDialog(this, "Login or password is incorrect").setVisible(true);
                 return;
             }
-            
+
             UserFrame newUserFrame = new UserFrame(user);
             dispose();
             newUserFrame.setVisible(true);
